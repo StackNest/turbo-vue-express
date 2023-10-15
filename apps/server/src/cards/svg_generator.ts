@@ -15,7 +15,7 @@ const createCardTitle = (username: string, likes: number) => {
     `;
 };
 
-const createCardBody = (title: string, short_description: string) => {
+const createCardBody = (title: string, short_description: string): string => {
   return `
         <g data-testid="main-card-body" transform="translate(0, 45)">
         <svg data-testid="lang-items" x="25" width="400" height="40" viewBox="0 0 400 40">
@@ -73,16 +73,23 @@ const cardStyle = `
         .heart-count { font-size: 12px; fill: #495057;}
     </style>
 `;
-const svg_generator = (data: any) => {
+
+interface CardData {
+  username: string,
+  title: string,
+  description: string,
+  tags: string[]
+}
+
+const svg_generator = (data: CardData) => {
   console.log('data', data)
-  // ${createCardTitle(data.user.username, data.likes)}
-            // ${createCardBody(data)}
-            // ${createCardBottom(data)}
   return `
         <svg xmlns="http://www.w3.org/2000/svg" width="450" height="130" viewBox="0 0 450 130" fill="none">
             ${cardStyle}
             <rect data-testid="card-bg" x="0.5" y="0.5" rx="4.5" height="99%" stroke="#e4e2e2" width="449" fill="#fffefe" stroke-opacity="1"/>
-            ${JSON.stringify(data)}
+            ${createCardTitle(data.username, 10)}
+            ${createCardBody(data.title, data.description)}
+            ${createCardBottom(data.tags)}
         </svg>
     `;
 };
