@@ -27,5 +27,5 @@ COPY --from=builder /turbo/packages /turbo/packages
 
 RUN npm install --production
 
-EXPOSE 3000 5000
+EXPOSE 8080 5000
 CMD ["npm", "start"]
